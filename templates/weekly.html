@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Tâches de la semaine - Toga List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  
+  <!-- Titre -->
+  <h2 class="text-center mb-5">
+    📅 <span class="highlight">Tâches de la Semaine</span>
+  </h2>
+
+  <!-- Formulaire d'ajout -->
+  <form method="POST" class="d-flex flex-wrap justify-content-center mb-4">
+    <input type="text" name="content" class="form-control me-2 mb-2" style="max-width:400px;" placeholder="Nouvelle tâche hebdomadaire..." required>
+    <button class="btn btn-primary mb-2" type="submit">+ Ajouter</button>
+  </form>
+
+  <!-- Liste des tâches -->
+  <div class="card shadow-sm border-0 rounded-3 w-75 mx-auto">
+    <div class="card-body p-0">
+      <ul class="list-group list-group-flush">
+        {% for t in tasks %}
+          <li class="list-group-item d-flex justify-content-between align-items-center 
+              {% if t.done %}list-group-item-success{% endif %}">
+            
+            <!-- Tâche -->
+            <div>
+              {% if t.done %}
+                ✅ <span class="text-decoration-line-through">{{ t.content }}</span>
+              {% else %}
+                {{ t.content }}
+              {% endif %}
+            </div>
+
+            <!-- Actions -->
+            <div>
+              <form action="/weekly/toggle" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ t.id }}">
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3" type="submit">
+                  {% if t.done %}Annuler{% else %}Terminer{% endif %}
+                </button>
+              </form>
+              <form action="/weekly/delete" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ t.id }}">
+                <button class="btn btn-sm btn-outline-danger rounded-pill px-3" type="submit">Supprimer</button>
+              </form>
+            </div>
+          </li>
+        {% else %}
+          <li class="list-group-item text-center text-muted py-3">
+            Aucune tâche pour cette semaine.
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

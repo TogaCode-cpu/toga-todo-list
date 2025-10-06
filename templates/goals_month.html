@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Objectifs du Mois - Toga List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- Titre -->
+  <h2 class="text-center mb-5">
+    🗓️ <span class="highlight">Objectifs du Mois</span>
+  </h2>
+
+  <!-- Formulaire d'ajout -->
+  <form method="POST" class="d-flex flex-wrap justify-content-center mb-4">
+    <input type="text" name="content" 
+           class="form-control me-2 mb-2" 
+           style="max-width:450px;" 
+           placeholder="Nouvel objectif mensuel..." 
+           required>
+    <button class="btn btn-success mb-2" type="submit">+ Ajouter</button>
+  </form>
+
+  <!-- Liste des objectifs -->
+  <div class="card shadow-sm border-0 rounded-3 w-75 mx-auto">
+    <div class="card-body p-0">
+      <ul class="list-group list-group-flush">
+        {% for goal in goals %}
+          <li class="list-group-item d-flex justify-content-between align-items-center 
+              {% if goal.done %}list-group-item-success{% endif %}">
+
+            <!-- Texte -->
+            <div>
+              {% if goal.done %}
+                ✅ <span class="text-decoration-line-through">{{ goal.content }}</span>
+              {% else %}
+                {{ goal.content }}
+              {% endif %}
+            </div>
+
+            <!-- Actions -->
+            <div>
+              <form action="/goals-month/toggle" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ goal.id }}">
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3" type="submit">
+                  {% if goal.done %}Annuler{% else %}Terminer{% endif %}
+                </button>
+              </form>
+              <form action="/goals-month/delete" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ goal.id }}">
+                <button class="btn btn-sm btn-outline-danger rounded-pill px-3" type="submit">Supprimer</button>
+              </form>
+            </div>
+          </li>
+        {% else %}
+          <li class="list-group-item text-center text-muted py-3">
+            Aucun objectif pour ce mois.
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

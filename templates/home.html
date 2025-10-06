@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Accueil - Toga List{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+  <h1 class="fw-bold">Bienvenue sur TOGA LIST</h1>
+  <p class="lead">Organise ta vie autour de 4 piliers essentiels pour une productivité équilibrée.</p>
+</div>
+
+<div class="row text-center g-4">
+  <div class="col-md-3">
+    <div class="card shadow-sm h-100 p-3">
+      <div class="text-primary mb-3"><i class="bi bi-heart-pulse-fill" style="font-size:2rem;"></i></div>
+      <h4 class="text-primary">Physique</h4>
+      <p>Prends soin de ton corps à travers le sport, une bonne alimentation et le repos.</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card shadow-sm h-100 p-3">
+      <div class="text-success mb-3"><i class="bi bi-book-fill" style="font-size:2rem;"></i></div>
+      <h4 class="text-success">Mental</h4>
+      <p>Développe ton esprit grâce à la lecture, l’apprentissage et la créativité.</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card shadow-sm h-100 p-3">
+      <div class="text-warning mb-3"><i class="bi bi-sun-fill" style="font-size:2rem;"></i></div>
+      <h4 class="text-warning">Spirituel</h4>
+      <p>Aligne-toi avec toi-même grâce à la méditation, la prière ou la réflexion intérieure.</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card shadow-sm h-100 p-3">
+      <div class="text-danger mb-3"><i class="bi bi-clipboard-check-fill" style="font-size:2rem;"></i></div>
+      <h4 class="text-danger">Responsabilité</h4>
+      <p>Respecte tes engagements : études, travail, famille et autres obligations.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

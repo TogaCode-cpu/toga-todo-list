@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Tâches du Jour - Toga List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  
+  <!-- Titre -->
+  <h2 class="text-center mb-5">
+    📅 <span class="highlight">Tâches du Jour</span>
+  </h2>
+
+  <!-- Formulaire d'ajout -->
+  <form method="POST" class="d-flex flex-wrap justify-content-center mb-5">
+    <select name="categorie" class="form-select me-2 mb-2" style="max-width:200px;">
+      <option value="Physique">Victoire Physique</option>
+      <option value="Spirituel">Victoire Spirituelle</option>
+      <option value="Mental">Victoire Mentale</option>
+      <option value="Responsabilité">Victoire de Responsabilité</option>
+    </select>
+    <input type="text" name="content" class="form-control me-2 mb-2" style="max-width:400px;" placeholder="Nouvelle tâche..." required>
+    <button class="btn btn-primary mb-2" type="submit">+ Ajouter</button>
+  </form>
+
+  <!-- Tâches par catégorie -->
+  <div class="row">
+    {% for cat, tasks in categories.items() %}
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 rounded-3">
+        
+        <!-- Titre catégorie -->
+        <div class="card-header text-white text-center fw-bold" 
+             style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
+          {{ cat }}
+        </div>
+
+        <!-- Liste des tâches -->
+        <ul class="list-group list-group-flush">
+          {% for task in tasks %}
+          <li class="list-group-item d-flex justify-content-between align-items-center 
+              {% if task.done %}list-group-item-success{% endif %}">
+            
+            <!-- Contenu tâche -->
+            <div>
+              {% if task.done %}
+                ✅ <span class="text-decoration-line-through">{{ task.content }}</span>
+              {% else %}
+                {{ task.content }}
+              {% endif %}
+            </div>
+
+            <!-- Actions -->
+            <div>
+              <form action="/daily/toggle" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ task.id }}">
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3" type="submit">
+                  {% if task.done %}Annuler{% else %}Terminer{% endif %}
+                </button>
+              </form>
+              <form action="/daily/delete" method="POST" class="d-inline">
+                <input type="hidden" name="id" value="{{ task.id }}">
+                <button class="btn btn-sm btn-outline-danger rounded-pill px-3" type="submit">Supprimer</button>
+              </form>
+            </div>
+          </li>
+          {% else %}
+          <li class="list-group-item text-muted text-center py-3">
+            Aucune tâche ici pour l’instant.
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Productivité - Toga List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">📊 Suivi de productivité</h1>
+
+  <!-- Cartes de stats -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-3">
+      <div class="card text-center shadow-sm p-3 stat-card">
+        <h5>Jour</h5>
+        <p class="display-6 text-primary">{{ stats.daily.done }}/{{ stats.daily.total }}</p>
+        <small class="text-muted">Tâches terminées</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center shadow-sm p-3 stat-card">
+        <h5>Semaine</h5>
+        <p class="display-6 text-success">{{ stats.weekly.done }}/{{ stats.weekly.total }}</p>
+        <small class="text-muted">Tâches terminées</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center shadow-sm p-3 stat-card">
+        <h5>Mois</h5>
+        <p class="display-6 text-warning">{{ stats.monthly.done }}/{{ stats.monthly.total }}</p>
+        <small class="text-muted">Objectifs atteints</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center shadow-sm p-3 stat-card">
+        <h5>Année</h5>
+        <p class="display-6 text-danger">{{ stats.yearly.done }}/{{ stats.yearly.total }}</p>
+        <small class="text-muted">Objectifs atteints</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphique -->
+  <div class="chart-container">
+    <canvas id="productivityChart"></canvas>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-outline-primary">← Retour à l'accueil</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const stats = {{ stats | tojson }};
+  const ctx = document.getElementById('productivityChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Jour', 'Semaine', 'Mois', 'Année'],
+      datasets: [{
+        label: 'Progression',
+        data: [
+          stats.daily.done,
+          stats.weekly.done,
+          stats.monthly.done,
+          stats.yearly.done
+        ],
+        backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545'],
+        borderWidth: 2,
+        hoverOffset: 12
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Progression globale des tâches', font: { size: 18 } },
+        legend: { position: 'bottom' }
+      }
+    }
+  });
+</script>
+{% endblock %}

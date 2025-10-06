@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": "uuid-user-1",
+      "email": "test@mail.com",
+      "password": "1234",
+      "year_goals": [
+        {
+          "id": "1a492c8b-fd89-4e57-a944-79c60a7e7a9b",
+          "content": "hi",
+          "done": true
+        },
+        {
+          "id": "58f3748d-14ff-4934-9268-da8bf6b815cb",
+          "content": "j",
+          "done": true
+        }
+      ],
+      "month_goals": [
+        {
+          "id": "4f1bdb94-4848-4a41-a81b-7a10b0827470",
+          "content": "hiiii",
+          "done": true
+        }
+      ],
+      "weekly_tasks": [],
+      "daily_tasks": []
+    }
+  ],
+  "year_goals": [
+    {
+      "id": "bf9008b4-8d92-4c02-953f-83b582985700",
+      "content": "hjhk",
+      "done": false
+    }
+  ],
+  "month_goals": [
+    {
+      "id": "f793dd7d-c281-48a0-b71d-4f84a457028b",
+      "content": "gj",
+      "done": false
+    }
+  ],
+  "weekly_tasks": [
+    {
+      "id": "eecf5a12-f628-40bd-80a8-848263d34819",
+      "content": "hj",
+      "done": false
+    },
+    {
+      "id": "3e6c0241-4656-480a-8472-d8c168fb52a7",
+      "content": "hi",
+      "done": false
+    }
+  ],
+  "daily_tasks": [
+    {
+      "id": "0b3e9d8f-451f-4ffb-a9b6-642667a64653",
+      "categorie": "Physique",
+      "content": "j",
+      "done": false,
+      "completed_at": null
+    },
+    {
+      "id": "d613667c-fa30-491c-9e37-3dc93e5c9683",
+      "categorie": "Spirituel",
+      "content": "hj",
+      "done": false,
+      "completed_at": null
+    }
+  ]
+}
